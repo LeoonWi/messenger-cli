@@ -36,6 +36,7 @@ func (h *Hub) run() {
 			h.clients[conn] = true
 			log.Printf("клиент подключён | всего клиентов: %d", len(h.clients))
 		case conn := <-h.unregister:
+			// если ok == true - удаляем пользователя из хранилища
 			if _, ok := h.clients[conn]; ok {
 				delete(h.clients, conn)
 				conn.Close()
